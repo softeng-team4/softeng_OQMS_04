@@ -1,5 +1,6 @@
-import { Row, Col, Container } from 'react-bootstrap';
-import "../App.css";
+import { Row, Col, Container, Button, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 function DefaultRoute() {
     return (
@@ -16,18 +17,89 @@ function DefaultRoute() {
 
 function AppLayout(props) {
     return (
-        <Container fluid>
+        <Container>
             <Row>
+                <Link to="/getTicket"><Button variant="outline-primary">Get Ticket</Button></Link>
 
-                <Col>
-                    {/* main page show here*/}
-                    <Outlet />
-                </Col>
+                <Link to='/statistics'><Button variant="outline-secondary">Show statistics</Button></Link>
+            </Row>
+            <Row>
+                <Link to='/display'><Button variant="outline-success">Display screen</Button></Link>
+
+                <Link to='/nextCustomer'><Button variant="outline-warning">next Customer</Button></Link>
 
             </Row>
+        </Container>
+    );
+}
+
+function TicketRoute(props) {
+    return (
+        <Container fluid>
+            <Navbar bg="primary" variant="dark">
+                <Container>
+                    <Navbar.Brand >
+                        TicketRoute
+                    </Navbar.Brand>
+                    <Link to="/"><Button variant='danger'>Back</Button></Link>
+
+                </Container>
+            </Navbar>
+        </Container>
+
+    );
+}
+
+function DisplayRoute(props) {
+    return (
+        <Container fluid>
+            <Navbar bg="primary" variant="dark">
+                <Container>
+                    <Navbar.Brand >
+                        Display Screen
+                    </Navbar.Brand>
+                    <Link to="/"><Button variant='danger'>Back</Button></Link>
+
+                </Container>
+            </Navbar>
+        </Container>
+
+
+    );
+}
+
+function NextRoute(props) {
+    return (
+        <Container fluid>
+            <Navbar bg="primary" variant="dark">
+                <Container>
+                    <Navbar.Brand >
+                        Next Customer
+                    </Navbar.Brand>
+                    <Link to="/"><Button variant='danger'>Back</Button></Link>
+
+                </Container>
+            </Navbar>
+        </Container>
+
+    );
+}
+
+function StatisticsRoute(props) {
+    return (
+        <Container fluid>
+            <Navbar bg="primary" variant="dark">
+                <Container>
+                    <Navbar.Brand >
+                        StatisticsRoute
+                    </Navbar.Brand>
+                    <Link to="/"><Button variant='danger'>Back</Button></Link>
+
+                </Container>
+            </Navbar>
 
         </Container>
     );
 }
 
-export { DefaultRoute, AppLayout };
+export { DefaultRoute, AppLayout, TicketRoute, StatisticsRoute, NextRoute, DisplayRoute };

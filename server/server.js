@@ -6,10 +6,10 @@ const cors = require('cors');
 const dayjs=require('dayjs');
 const passport = require('passport');
 const session = require('express-session');
-const TicketDAO = require('./TicketDAO');   
-const ServiceDAO = require('./ServiceDAO');
-const CounterDAO = require('./CounterDAO');
-const ServiceCounterDAO = require('./Service-CounterDAO');
+const TicketDAO = require('./dao/TicketDAO');   
+const ServiceDAO = require('./dao/ServiceDAO');
+const CounterDAO = require('./dao/CounterDAO');
+const ServiceCounterDAO = require('./dao/Service-CounterDAO');
 const PORT = 3001;
 const corsOptions = {
     origin: 'http://localhost:3000',
