@@ -1,8 +1,13 @@
 'use strict';
 
 const express = require('express');
+const dayjs = require('dayjs');
 const morgan = require('morgan'); // logging middleware
 const cors = require('cors');
+const TicketDAO = require('./TicketDAO');   
+const ServiceDAO = require('./ServiceDAO');
+const CounterDAO = require('./CounterDAO');
+const ServiceCounterDAO = require('./Service-CounterDAO');
 
 const { validationResult, body, param, check } = require('express-validator');
 
@@ -57,6 +62,11 @@ app.use(session({
 }));
 app.use(passport.authenticate('session'));
 
+const ticketDao = new TicketDAO("office.db");
+const serviceDao = new ServiceDAO("office.db");
+const counterDao = new CounterDAO("office.db");
+const serviceCounterDAO = new ServiceCounterDAO("office.db");
+
 
 /*** User APIs ***/
 
@@ -100,3 +110,26 @@ app.delete('/api/sessions/current', (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
+
+
+
+/*** TICKET APIs ***/
+
+// POST /api/ticket/
+
+app.post('/api/ticket/:service', async (req,res) =>{
+
+  try{
+    const lastID = await ticketDao.getLastTicket(req.params.service);
+    //get expected waiting time
+    serTime = await serviceDao.getServiceTime(req.params.service);
+    peopleAhead = /* get number of people ahead */ 2;
+    await ticketDao.createTicket(req.params.service, lastID + 1, exp_waitTime);
+    //add ticket to the corresponding queue
+    return res.status(401).json();
+  }
+  catch(err){
+    console.log(err);
+    return res.status(500).json({error: 'Internal Server Error'});
+  }
+})
