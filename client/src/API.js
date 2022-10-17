@@ -1,4 +1,6 @@
 
+import StatisticTuple from './model/StatisticTuple';
+
 const SERVER_URL = 'http://localhost:3001';
 
 const logIn = async (credentials) => {
@@ -41,5 +43,35 @@ const logOut = async () => {
     return null;
 }
 
-const API = { logIn, getUserInfo, logOut };
+// Manager Statistics APIs
+
+const getStatistics = async (filters) => {
+  const url = '/api/statistics/';
+  const body = {
+    counter: filters.counter,
+    service_type: filters.service_type,
+    time_period: filters.time_period,
+  };
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+
+  if (!response.ok) {
+    try {
+      let errDetail = await response.json();
+      throw new Error(errDetail);
+    }
+    catch (err) {
+      const errDetail = { error: 'Server Unreachable' };
+      throw errDetail;
+    }
+  } else {
+    const jsonManagerStats = await response.json();
+    return jsonManagerStats.map(s => StatisticTuple.from(s));
+  }
+}
+
+const API = { logIn, getUserInfo, logOut, getStatistics };
 export default API;
