@@ -25,6 +25,19 @@ const serviceDao = new ServiceDAO("office.db");
 const counterDao = new CounterDAO("office.db");
 const serviceCounterDAO = new ServiceCounterDAO("office.db");
 
+/*SERVICE APIs */
+
+app.get('/api/services', async (req,res) =>{
+    try{
+        const services = await serviceDao.getServices();
+        return res.status(200).json(services);
+    }
+    catch(err){
+        console.log(err);
+        return res.status(500).json("Internal server error");
+    }
+})
+
 /* TICKET APIs */
 
 app.post('/api/ticket/:serviceId', async (req,res) =>{

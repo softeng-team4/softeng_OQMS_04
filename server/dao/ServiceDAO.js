@@ -24,6 +24,22 @@ class ServiceDAO{
         })
     }
 
+    getServices = () =>{
+        return new Promise((resolve,reject)=>{
+            const sql = 'SELECT * FROM services;';
+            this.db.all(sql,(err,rows)=>{
+                if(err)
+                    reject(err);
+                else{
+                    let services = [];
+                    for(let row of rows)
+                        services.push({id: row.id, name: row.name, service_time: row.service_time})
+                    resolve(services);
+                }
+            })
+        })
+    }
+
     getService = (id) =>{
         return new Promise((resolve,reject)=>{
             const sql = 'SELECT * FROM services WHERE id = ?;';
