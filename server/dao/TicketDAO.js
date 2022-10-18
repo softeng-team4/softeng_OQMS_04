@@ -3,6 +3,12 @@
 const sqlite = require('sqlite3');
 const dayjs = require('dayjs');
 
+var weekOfYear = require('dayjs/plugin/weekOfYear')
+dayjs.extend(weekOfYear)
+
+var advancedFormat = require('dayjs/plugin/advancedFormat')
+dayjs.extend(advancedFormat)
+
 class TicketDAO{
 
     constructor(dbname) {
@@ -14,7 +20,7 @@ class TicketDAO{
 
     newTicketsTable = () =>{
         return new Promise((resolve,reject) =>{
-            const sql = 'CREATE TABLE IF NOT EXISTS tickets (service INTEGER, num INTEGER, date TEXT, exp_waitTime TEXT NOT NULL, completed INTEGER NOT NULL, act_waitTime TEXT NOT NULL, counter_id INTEGER, PRIMARY KEY(service,num));';
+            const sql = 'CREATE TABLE IF NOT EXISTS tickets (id INTEGER PRIMARY KEY AUTOINCREMENT, service INTEGER, date TEXT, time TEXT, week TEXT, month TEXT, exp_waitTime TEXT, completed INTEGER NOT NULL, act_waitTime TEXT, counter_id INTEGER);';
             this.db.run(sql,(err) =>{
                 if(err)
                     reject(err);
@@ -37,14 +43,27 @@ class TicketDAO{
         })
     }
 
-    createTicket = (service, num, exp_waitTime) => {
+    createTicket = (service, exp_waitTime) => {
         return new Promise((resolve,reject) =>{
-            const sql = 'INSERT INTO tickets(service,num,date,exp_waitTime,completed) VALUES(?,?,?,?,0);';
-            this.db.run(sql,[service,num,dayjs().toISOString(),exp_waitTime],(err) =>{
+            const sql = 'INSERT INTO tickets(service,date,time,week,month,exp_waitTime,completed) VALUES(?,?,?,?,?,?,0); SELECT last_insert_rowid();';
+            const now = dayjs();
+            this.db.run(sql,[service,now.format('DD/MM/YY'),now.format('hh:mm:ss'),now.format('wo-YY'),now.format('MM/YY'),exp_waitTime],function(err){
                 if(err)
                     reject(err);
                 else
                     resolve(this.lastID);
+            })
+        })
+    }
+
+    getQueueLength = (service) =>{
+        return new Promise((resolve,reject) =>{
+            const sql = 'SELECT COUNT(*) FROM tickets WHERE service = ? and completed = 0;';
+            this.db.get(sql,[service],(err,row) =>{
+                if(err)
+                    reject(err);
+                else
+                    resolve(row);
             })
         })
     }

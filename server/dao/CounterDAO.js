@@ -13,7 +13,7 @@ class CounterDAO{
 
     newCountersTable = () =>{
         return new Promise((resolve,reject) =>{
-            const sql = 'CREATE TABLE IF NOT EXISTS counters (id INTEGER PRIMARY KEY AUTOINCREMENT);';
+            const sql = 'CREATE TABLE IF NOT EXISTS counters (id INTEGER PRIMARY KEY AUTOINCREMENT, open INTEGER NOT NULL);';
             this.db.run(sql,(err) =>{
                 if(err)
                     reject(err);
