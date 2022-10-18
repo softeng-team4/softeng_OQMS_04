@@ -58,12 +58,14 @@ class TicketDAO{
 
     getQueueLength = (service) =>{
         return new Promise((resolve,reject) =>{
-            const sql = 'SELECT COUNT(*) FROM tickets WHERE service = ? and completed = 0;';
+            const sql = 'SELECT COUNT(*) as N FROM tickets WHERE service = ? and completed = 0;';
             this.db.get(sql,[service],(err,row) =>{
                 if(err)
                     reject(err);
+                else if(!row)
+                    resolve(0);
                 else
-                    resolve(row);
+                    resolve(row.N);
             })
         })
     }
