@@ -1,6 +1,8 @@
 import { Row, Col, Container, Button, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import DisplayScreen from "./DisplayScreen"
+
 
 function DefaultRoute() {
     return (
@@ -36,6 +38,7 @@ function AppLayout(props) {
 function TicketRoute(props) {
     return (
         <Container fluid>
+
             <Navbar bg="primary" variant="dark">
                 <Container>
                     <Navbar.Brand >
@@ -45,6 +48,7 @@ function TicketRoute(props) {
 
                 </Container>
             </Navbar>
+
         </Container>
 
     );
@@ -53,15 +57,20 @@ function TicketRoute(props) {
 function DisplayRoute(props) {
     return (
         <Container fluid>
-            <Navbar bg="primary" variant="dark">
-                <Container>
-                    <Navbar.Brand >
-                        Display Screen
-                    </Navbar.Brand>
-                    <Link to="/"><Button variant='danger'>Back</Button></Link>
+            <Row>
+                <Navbar bg="primary" variant="dark">
+                    <Container>
+                        <Navbar.Brand >
+                            Display Screen
+                        </Navbar.Brand>
+                        <Link to="/"><Button variant='danger'>Back</Button></Link>
 
-                </Container>
-            </Navbar>
+                    </Container>
+                </Navbar>
+            </Row>
+            <Row>
+                <DisplayScreen />
+            </Row>
         </Container>
 
 
