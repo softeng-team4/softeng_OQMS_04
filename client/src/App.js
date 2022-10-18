@@ -1,11 +1,11 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MainBoard from './MainBoard';
+import OfficerInterface from './OfficerInterface';
 
 function App() {
   return (
     <div className="App">
-      <MainBoard />
+      <OfficerInterface />
     </div>
   );
 }
