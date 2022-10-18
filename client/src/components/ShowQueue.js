@@ -40,7 +40,6 @@ function ServiceRow(props) {
         setQueues(list);
     };
 
-    console.log(queues)
     return (
         <>
 

@@ -22,7 +22,7 @@ async function getQueues(service) {
 
   let response = await fetch(SERVER_URL + BASEURL + `/queue/` + service);
   let queuesJson = await response.json();
-  console.log(queuesJson)
+
   if (response.ok) {
     return queuesJson.map((x) => x);
   } else {
