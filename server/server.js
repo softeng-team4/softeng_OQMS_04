@@ -73,4 +73,15 @@ app.get('/api/queue/:serviceId', async (req,res) =>{
     }
 })
 
+// GET /api/countersTicket
+app.get('/api/countersTicket', async (req, res) => {
+    try {
+      const currentCountersTicket = await dao.currentTicket();
+      res.json(currentCountersTicket);
+    } catch(err) {
+      res.status(500).end();
+    }
+  });
+
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}/`));
+
