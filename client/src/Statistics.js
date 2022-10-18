@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Col, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import API from './API';
 import ServerError from './ServerError';
+import FilterForm from './FilterForm';
 
 const Statistics = (props) => {
 
@@ -11,22 +12,26 @@ const Statistics = (props) => {
     // state for an error of the server response
     const [serverError, setServerError] = useState(false);
     // default filters to retrive stats data from the server
-    const defaultFilters = {counter: 0, service_type: 1, time_period: 0}
+    const defaultFilters = [{counter: 0}, {service_type: 1}, {time_period: 1}]
     // state to keep track of the selected filters
     const [filters, setFilters] = useState(defaultFilters)
     // state for holding retrived stats from the server
     const [tuples, setTuples] = useState(undefined)
+    // state to trigger update of filters
+    const [update, setUpdate] = useState(false)
 
     // get stats from server
     useEffect(() => {
-        API.getStatistics(filters).then((tuples) => {
-            setTuples(tuples);
-            setIsLoading(false);
-        }).catch(err => {
-            setServerError(err.error);
-            setIsLoading(false);
-        });
-    }, [serverError]);
+        // API.getStatistics(filters).then((tuples) => {
+        //     setTuples(tuples);
+        //     setIsLoading(false);
+        // }).catch(err => {
+        //     setServerError(err.error);
+        //     setIsLoading(false);
+        // });
+        console.log("Works!")
+        setIsLoading(false);
+    }, [serverError, update]);
 
     return (
         <>
@@ -35,7 +40,13 @@ const Statistics = (props) => {
                 <>
                     {serverError ? <ServerError serverError={serverError} /> :
                         <>
-                            {/*TODO*/}
+                            <Row>
+                                <Col />
+                                <Col md={6} >
+                                    <FilterForm filters={filters} setFilters={setFilters} update={update} setUpdate={setUpdate}/>
+                                </Col>
+                                <Col />
+                            </Row>
                         </>
                     }
                 </>
