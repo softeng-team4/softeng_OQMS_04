@@ -88,18 +88,21 @@ function NextRoute(props) {
 
 function StatisticsRoute(props) {
     return (
-        <Container fluid>
-            <Navbar bg="primary" variant="dark">
-                <Container>
-                    <Navbar.Brand >
-                        StatisticsRoute
-                    </Navbar.Brand>
-                    <Link to="/"><Button variant='danger'>Back</Button></Link>
-
-                </Container>
-            </Navbar>
-            <Statistics/>
-        </Container>
+        <>
+            <Container fluid>
+                <Navbar bg="primary" variant="dark">
+                    <Container>
+                        <Navbar.Brand >
+                            StatisticsRoute
+                        </Navbar.Brand>
+                        <Link to="/"><Button variant='danger'>Back</Button></Link>
+                    </Container>
+                </Navbar>
+            </Container>
+            <Container fluid>
+                <Statistics/>
+            </Container>
+        </>
     );
 }
 
