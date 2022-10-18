@@ -10,14 +10,25 @@ import API from './API';
 function App() {
   const [display, setDisplay] = useState([]);
 
+  const [services, setServices] = useState([]);
+
   useEffect(() => {
     getCountersTicket();
+    getServices();
   }, []);
 
   const getCountersTicket = async () => {
     const list = await API.getCountersTicket();
     //get display info from api
     setDisplay(list);
+  };
+
+
+
+  const getServices = async () => {
+    const list = await API.getServices();
+    //get queues info from api
+    setServices(list);
   };
 
   return (
@@ -28,7 +39,7 @@ function App() {
           <Route path='/' element={<AppLayout />}></Route>
           <Route path='/getTicket' element={<TicketRoute />}> </Route>
           <Route path='/statistics' element={<StatisticsRoute />}> </Route>
-          <Route path='/display' element={<DisplayRoute display={display} />}> </Route>
+          <Route path='/display' element={<DisplayRoute display={display} services={services} />}> </Route>
           <Route path='/nextCustomer' element={<NextRoute />}> </Route>
 
 

@@ -1,36 +1,40 @@
-import { Container, Table } from 'react-bootstrap';
+import { Container, Row, Table } from 'react-bootstrap';
 
 function DisplayScreen(props) {
-    console.log(props.display)
+
     return (
         <>
-            <Container >
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Counter</th>
-                            <th>Ticket ID</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {props.displays.map((display) => <DisplayRow display={display}/>)}
+            <Row>
+                <Container >
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Counter</th>
+                                <th>Ticket ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {props.displays.map((display) => <DisplayRow display={display} key={display.counterId}/>)}
 
-                    </tbody>
-                </Table>
-            </Container>
+                        </tbody>
+                    </Table>
+                </Container>
+            </Row>
+            
         </>
     );
 }
 
-function DisplayRow(props){
-    return(
-        
+function DisplayRow(props) {
+    return (
+
         <tr>
-        <th>{props.display.counterId}</th>
-        <th>{props.display.ticketId}</th>
+            <th>{props.display.counterId}</th>
+            <th>{props.display.ticketId}</th>
         </tr>
-        
+
     );
 }
+
 
 export default DisplayScreen;

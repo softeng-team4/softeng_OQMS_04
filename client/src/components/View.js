@@ -2,6 +2,7 @@ import { Row, Col, Container, Button, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import DisplayScreen from "./DisplayScreen"
+import ShowQueue from './ShowQueue';
 
 
 function DefaultRoute() {
@@ -70,7 +71,10 @@ function DisplayRoute(props) {
                 </Navbar>
             </Row>
             <Row>
-                <DisplayScreen displays={props.display}/>
+                <DisplayScreen displays={props.display} />
+            </Row>
+            <Row>
+                <ShowQueue queues={props.queues} services={props.services}/>
             </Row>
         </Container>
 
