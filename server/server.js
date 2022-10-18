@@ -26,3 +26,13 @@ const counterDao = new CounterDAO("office.db");
 const serviceCounterDAO = new ServiceCounterDAO("office.db");
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}/`));
+
+// GET /api/countersTicket
+app.get('/api/countersTicket', async (req, res) => {
+    try {
+      const currentCountersTicket = await dao.currentTicket();
+      res.json(currentCountersTicket);
+    } catch(err) {
+      res.status(500).end();
+    }
+  });
