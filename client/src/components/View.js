@@ -55,6 +55,7 @@ function TicketRoute(props) {
 }
 
 function DisplayRoute(props) {
+
     return (
         <Container fluid>
             <Row>
@@ -69,7 +70,7 @@ function DisplayRoute(props) {
                 </Navbar>
             </Row>
             <Row>
-                <DisplayScreen />
+                <DisplayScreen displays={props.display}/>
             </Row>
         </Container>
 

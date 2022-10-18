@@ -1,7 +1,7 @@
 import { Container, Table } from 'react-bootstrap';
 
 function DisplayScreen(props) {
-
+    console.log(props.display)
     return (
         <>
             <Container >
@@ -13,11 +13,23 @@ function DisplayScreen(props) {
                         </tr>
                     </thead>
                     <tbody>
+                        {props.displays.map((display) => <DisplayRow display={display}/>)}
 
                     </tbody>
                 </Table>
             </Container>
         </>
+    );
+}
+
+function DisplayRow(props){
+    return(
+        
+        <tr>
+        <th>{props.display.counterId}</th>
+        <th>{props.display.ticketId}</th>
+        </tr>
+        
     );
 }
 

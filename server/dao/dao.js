@@ -12,7 +12,7 @@ const db = new sqlite.Database('office.db', (err) => {
 
 exports.currentTicket = () => {
     return new Promise((resolve, reject) => {
-        const sql = 'MAX(id) AS ticket_id, counter_id FROM tickets WHERE counter_id IS NOT NULL AND completed =0 GROUP BY counter_id';
+        const sql = 'SELECT MAX(id) AS ticket_id, counter_id FROM tickets WHERE counter_id IS NOT NULL AND completed =0 GROUP BY counter_id';
         db.all(sql, [], (err, rows) => {
             if (err) {
                 reject(err);
