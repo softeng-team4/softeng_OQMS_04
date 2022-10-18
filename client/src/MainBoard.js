@@ -4,9 +4,9 @@ import DeskBoard from "./DeskBoard";
 import ListGroup from 'react-bootstrap/ListGroup';
 
 function MainBoard(props) {
-    const [deskList, setDeskList] = useState([1, 2, 3, 4]);
+    const [deskList, setDeskList] = useState([1, 2, 3, 4, 5]);
 
-    return <Container>
+    return <Container style={{ padding: 20}}>
         <ListGroup horizontal variant='flush'>
             { deskList.map(desk => 
                 <ListGroup.Item>

@@ -7,9 +7,9 @@ function DeskBoard(props) {
             }
           <Card.Header as="h4">DeskName</Card.Header>
           <Card.Body>
-            <Card.Title>Supported services list</Card.Title>
+            <Card.Title>We are serving <i><b>T1</b></i></Card.Title>
             <Card.Text>
-              We are serving <i><b>T1</b></i>
+              Supported services list
             </Card.Text>
           </Card.Body>
         </Card>
