@@ -1,11 +1,11 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NewTicket from './NewTicket';
+import MainBoard from './MainBoard';
 
 function App() {
   return (
     <div className="App">
-      <NewTicket />
+      <MainBoard />
     </div>
   );
 }
