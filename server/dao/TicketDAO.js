@@ -68,6 +68,18 @@ class TicketDAO{
         })
     }
 
+    getQueue = (service) => {
+        return new Promise((resolve,reject) =>{
+            const sql = 'SELECT id FROM tickets WHERE service = ? and completed = 0;';
+            this.db.all(sql,[service],(err,row) =>{
+                if(err)
+                    reject(err);
+                else
+                    resolve(row);
+            })
+        })
+    }
+
 }
 
 module.exports = TicketDAO
