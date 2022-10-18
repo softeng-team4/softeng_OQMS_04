@@ -24,6 +24,18 @@ class CounterDAO{
         })
     }
 
+    // getOpenCounters = () => {
+    //     return new Promise((resolve,reject) =>{
+    //         const sql = 'SELECT id FROM counters where open=1';
+    //         this.db.all(sql,[service],(err,row) =>{
+    //             if(err)
+    //                 reject(err);
+    //             else
+    //                 resolve(row);
+    //         })
+    //     })
+    // }
+
 }
 
 module.exports = CounterDAO
