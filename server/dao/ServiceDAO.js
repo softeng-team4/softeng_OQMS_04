@@ -24,6 +24,18 @@ class ServiceDAO{
         })
     }
 
+    getService = (id) =>{
+        return new Promise((resolve,reject)=>{
+            const sql = 'SELECT * FROM services WHERE id = ?;';
+            this.db.get(sql,[id],(err,row)=>{
+                if(err)
+                    reject(err);
+                else
+                    resolve(row);
+            })
+        })
+    }
+
 }
 
 module.exports = ServiceDAO
