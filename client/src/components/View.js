@@ -5,6 +5,7 @@ import NewTicket from './NewTicket';
 import MainBoard from './MainBoard';
 import OfficerInterface from './OfficerInterface';
 import ShowQueue from './ShowQueue';
+import DisplayScreen from './DisplayScreen';
 
 
 function DefaultRoute() {
@@ -87,11 +88,19 @@ function DisplayRoute(props) {
                     <MainBoard />
                 </Container>
             </Row>
-            <Row>
-                <Container>
-                    <ShowQueue services={props.services} />
-                </Container>
-            </Row>
+
+
+            <Container>
+                <Row>
+                    <Col>
+                        <DisplayScreen displays={props.display} />
+                    </Col>
+                    <Col>
+                        <ShowQueue services={props.services} />
+                    </Col>
+                </Row>
+            </Container>
+
         </Container>
 
 
@@ -110,7 +119,7 @@ function NextRoute(props) {
 
                 </Container>
             </Navbar>
-            <OfficerInterface/>
+            <OfficerInterface />
         </Container>
 
     );

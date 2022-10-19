@@ -35,16 +35,16 @@ function App() {
       <BrowserRouter>
         <Routes>
 
-        <Route path='/' element={<AppLayout/>}></Route>
-        <Route path='/getTicket' element={<TicketRoute/>}> </Route>
-        <Route path='/statistics' element={<StatisticsRoute/>}> </Route>
-        <Route path='/display' element={<DisplayRoute services={services}/>}> </Route>
-        <Route path='/nextCustomer' element={<NextRoute/>}> </Route>
-          
-        
-        
-        <Route path='*' element={<DefaultRoute />} />
-        
+          <Route path='/' element={<AppLayout />}></Route>
+          <Route path='/getTicket' element={<TicketRoute />}> </Route>
+          <Route path='/statistics' element={<StatisticsRoute />}> </Route>
+          <Route path='/display' element={<DisplayRoute services={services} display={display} />}> </Route>
+          <Route path='/nextCustomer' element={<NextRoute />}> </Route>
+
+
+
+          <Route path='*' element={<DefaultRoute />} />
+
         </Routes>
       </BrowserRouter>
     </>
