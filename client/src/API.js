@@ -1,4 +1,6 @@
 
+import StatisticTuple from './model/StatisticTuple';
+
 import CounterInfo from './CounterInfo';
 import Queue from './model/Queue';
 import Service from './model/Service';
@@ -64,5 +66,30 @@ async function createTicket(serviceId) {
   }
 }
 
-const API = { logIn, getUserInfo, logOut, getAllServices, createTicket };
+// Manager Statistics APIs
+
+const getStatistics = async (filters) => {
+  const url = '/api/statistics/';
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(filters)
+  });
+
+  if (!response.ok) {
+    try {
+      let errDetail = await response.json();
+      throw new Error(errDetail);
+    }
+    catch (err) {
+      const errDetail = { error: 'Server Unreachable' };
+      throw errDetail;
+    }
+  } else {
+    const jsonManagerStats = await response.json();
+    return jsonManagerStats.map(s => StatisticTuple.from(s));
+  }
+}
+
+const API = { logIn, getUserInfo, logOut, getStatistics };
 export default API;

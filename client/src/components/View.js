@@ -1,5 +1,6 @@
 import { Row, Col, Container, Button, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Statistics from './StatsComponents/Statistics';
 import NewTicket from './NewTicket';
 import MainBoard from './MainBoard';
 
@@ -102,18 +103,21 @@ function NextRoute(props) {
 
 function StatisticsRoute(props) {
     return (
-        <Container fluid>
-            <Navbar bg="primary" variant="dark">
-                <Container>
-                    <Navbar.Brand >
-                        StatisticsRoute
-                    </Navbar.Brand>
-                    <Link to="/"><Button variant='danger'>Back</Button></Link>
-
-                </Container>
-            </Navbar>
-
-        </Container>
+        <>
+            <Container fluid>
+                <Navbar bg="primary" variant="dark">
+                    <Container>
+                        <Navbar.Brand >
+                            StatisticsRoute
+                        </Navbar.Brand>
+                        <Link to="/"><Button variant='danger'>Back</Button></Link>
+                    </Container>
+                </Navbar>
+            </Container>
+            <Container fluid>
+                <Statistics/>
+            </Container>
+        </>
     );
 }
 
