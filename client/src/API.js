@@ -66,6 +66,18 @@ async function createTicket(serviceId) {
   }
 }
 
+async function getCurrentTickets() {
+
+  let response = await fetch(SERVER_URL + BASEURL + `/countersTicket`);
+  let ticketList = await response.json();
+
+  if (response.ok) {
+    return ticketList;
+  } else {
+    throw ticketList;  // an object with the error coming from the server
+  }
+}
+
 // Manager Statistics APIs
 
 const getStatistics = async (filters) => {
@@ -91,5 +103,5 @@ const getStatistics = async (filters) => {
   }
 }
 
-const API = { getStatistics, getQueues, getCountersTicket, getServices, createTicket };
+const API = { getStatistics, getQueues, getCountersTicket, getServices, createTicket, getCurrentTickets };
 export default API;
