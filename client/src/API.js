@@ -47,15 +47,10 @@ const logOut = async () => {
 
 const getStatistics = async (filters) => {
   const url = '/api/statistics/';
-  const body = {
-    counter: filters.counter,
-    service_type: filters.service_type,
-    time_period: filters.time_period,
-  };
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
+    body: JSON.stringify(filters)
   });
 
   if (!response.ok) {
