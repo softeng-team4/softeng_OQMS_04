@@ -1,11 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner, Col, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import API from './API';
+import API from '../../API';
 import ServerError from './ServerError';
 import FilterForm from './FilterForm';
 import StatsTable from './StatsTable';
-import StatisticTuple from './model/StatisticTuple';
+import StatisticTuple from '../../model/StatisticTuple';
 
 const Statistics = () => {
 
