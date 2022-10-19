@@ -3,45 +3,54 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal';
 import { useEffect, useState } from 'react';
+import API from './API';
 
 function NewTicket(props) {
-    const [service, setService] = useState({});
-    const [validated, setValidated] = useState(false);
+    const [service, setService] = useState(undefined);
     const [serviceList, setServiceList] = useState([]);
     const [ticket, setTicket] = useState(undefined);
 
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleClose = () => {
+        setTicket(undefined);
+        setShow(false);
+    }
 
     useEffect(() => {
         reloadServices();
     }, []);
 
     const reloadServices = () => {
-        //const list = API.getAllServices();
-        const list = [
-            {id: 1, name: "Service 1", service_time: 2},
-            {id: 2, name: "Service 2", service_time: 2},
-            {id: 3, name: "Service 3", service_time: 2},
-            {id: 4, name: "Service 4", service_time: 2},
-            {id: 5, name: "Service 5", service_time: 2}
-        ];
-        setServiceList(list);
+        API.getAllServices().then(list => {
+            setServiceList(list);
+        }).catch(err => {
+            setServiceList([]);
+            console.log(err);
+        });
+    }
+
+    const updateService = (id) => {
+        let intId = parseInt(id);
+        const serv = serviceList.find((s) => {
+            return s.id === intId;
+        });
+        setService(serv);
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (event.currentTarget.checkValidity() === false) {
+        if (event.currentTarget.checkValidity() === false || service === undefined) {
             event.stopPropagation();
         } else {
             // call the API and visualize the ticket
-            //newTicket = API.createTicket(service.id);
-            //setTicket(newTicket)
-            setTicket({ num: 2, waitTime: 3 });
-            handleShow()
+            API.createTicket(service.id).then(newTicket => {
+                setTicket(newTicket);
+                handleShow();
+            }).catch(err => {
+                console.log(err);
+            });
         }
-        setValidated(true);
     };
 
     return <>
@@ -58,12 +67,12 @@ function NewTicket(props) {
         </Modal>
         <Container className="new_ticket_container" style={{ borderRadius: 20, borderColor: 'grey', borderWidth: 2, borderStyle: 'double', padding: 20 }}>
             <h2 align="center">Get a ticket</h2>
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form noValidate onSubmit={handleSubmit}>
                 <div style={{padding: 20}}>
-                    <Form.Select aria-label="Service selection form" required onChange={(e) => setService(e.target.value)}>
-                        <option>Select a service</option>
+                    <Form.Select aria-label="Service selection form" required onChange={(e) => updateService(e.target.value)}>
+                        <option value="-1">Select a service</option>
                         { serviceList.map(service => 
-                            <option key={service.id} value={service.name}>{service.name}</option>)
+                            <option key={service.id} value={service.id}>{service.name}</option>)
                         }
                     </Form.Select>
                 </div>

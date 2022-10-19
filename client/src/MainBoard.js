@@ -7,10 +7,10 @@ function MainBoard(props) {
     const [deskList, setDeskList] = useState([1, 2, 3, 4, 5]);
 
     return <Container style={{ padding: 20}}>
-        <ListGroup horizontal variant='flush'>
+        <ListGroup horizontal>
             { deskList.map(desk => 
-                <ListGroup.Item>
-                    <DeskBoard key={desk} desk={desk} />
+                <ListGroup.Item key={desk}>
+                    <DeskBoard desk={desk} />
                 </ListGroup.Item>)
             }
         </ListGroup>

@@ -41,5 +41,47 @@ const logOut = async () => {
     return null;
 }
 
-const API = { logIn, getUserInfo, logOut };
+async function getAllServices() {
+  const url = SERVER_URL + '/api/services';
+  try {
+      const response = await fetch(url);
+      if (response.ok) {
+          // process the response
+          const serviceList = await response.json();
+          return serviceList;
+      } else {
+          // application error (404, 500, ...)
+          const text = await response.text();
+          console.log(text);
+          throw new TypeError(text);
+      }
+  } catch (ex) {
+      // network error
+      console.log(ex);
+      throw ex;
+  }
+}
+
+async function createTicket(serviceId) {
+  const url = SERVER_URL + '/api/ticket/' + serviceId;
+  try {
+      const response = await fetch(url, {
+          method: 'POST',
+      });
+      if (response.ok) {
+        let ticket = await response.json();
+        console.log(ticket);
+        return ticket;
+      } else {
+        const text = await response.text();
+        console.log(text);
+        throw new TypeError(text);
+      }
+  } catch (ex) {
+      console.log(ex);
+      throw ex;
+  }
+}
+
+const API = { logIn, getUserInfo, logOut, getAllServices, createTicket };
 export default API;
