@@ -13,8 +13,8 @@ const nextTicket = async (counterId, ticketId) => {
     }),
   });
   if (response.ok) {
-    const next = await response.json();
-    return next;
+    const res = await response.json();
+    return res.next;
   }
   else {
     const errDetails = await response.text();
