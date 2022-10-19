@@ -75,7 +75,7 @@ function DisplayRoute(props) {
 
             <MainBoard />
             <Row>
-                <ShowQueue queues={props.queues} services={props.services}/>
+                <ShowQueue services={props.services}/>
             </Row>
         </Container>
 

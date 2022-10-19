@@ -64,15 +64,26 @@ app.post('/api/ticket/:serviceId', async (req, res) => {
 
 /*  Queue API*/
 app.get('/api/queue/:serviceId', async (req, res) => {
-        try {
-            const queue = await ticketDao.getQueue(req.params.serviceId);
-            return res.status(200).json(queue);
-        }
-        catch (err) {
-            console.log(err);
-            return res.status(500).json("Internal server error");
-        }
-    })
+    try {
+        const queue = await ticketDao.getQueue(req.params.serviceId);
+        return res.status(200).json(queue);
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json("Internal server error");
+    }
+})
+
+app.get('/api/queue/length/:serviceId', async (req, res) => {
+    try {
+        const queue = await ticketDao.getQueueLength(req.params.serviceId);
+        return res.status(200).json(queue);
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json("Internal server error");
+    }
+})
 
 // GET /api/countersTicket
 app.get('/api/countersTicket', async (req, res) => {

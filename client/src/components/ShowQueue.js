@@ -9,11 +9,11 @@ function ShowQueue(props) {
             <Row>
                 <Container >
                     <div className="fw-bold" style={{ color: 'red' }}>Waiting Line</div>
-                    <Table striped  hover>
+                    <Table striped hover>
                         <thead>
                             <tr>
                                 <th>Service Name</th>
-                                <th>Waiting Queue</th>
+                                <th>Waiting People</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,15 +29,23 @@ function ShowQueue(props) {
 
 function ServiceRow(props) {
     const [queues, setQueues] = useState([]);
+    const [queueLength, setQueueLength] = useState('');
 
     useEffect(() => {
-        getQueues(props.service.id)
-    }, []);
+        getQueues(props.service.id);
+        getQueueLength(props.service.id);
+    }, [queues.length]);
 
     const getQueues = async (serviceId) => {
         const list = await API.getQueues(serviceId);
         //get queues info from api
         setQueues(list);
+    };
+
+    const getQueueLength = async (serviceId) => {
+        const list = await API.getQueueLength(serviceId);
+        //get queues info from api
+        setQueueLength(list);
     };
 
     return (
@@ -46,22 +54,12 @@ function ServiceRow(props) {
 
             <tr>
                 <th>{props.service.name}</th>
-
-                {queues === '' ? '' : queues.map((queue, i) => <QueueRow queue={queue} key={i} />)}
-
+                <th>{queues === '' ? 0 : queueLength}</th>
+        
             </tr>
 
 
         </>
-
-    );
-}
-
-function QueueRow(props) {
-    return (
-
-
-        <th>{props.queue.id}</th>
 
     );
 }

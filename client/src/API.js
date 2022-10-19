@@ -32,6 +32,18 @@ async function getQueues(service) {
   }
 }
 
+async function getQueueLength(service) {
+
+  let response = await fetch(SERVER_URL + BASEURL + `/queue/length/` + service);
+  let queueLengthJson = await response.json();
+console.log('api',queueLengthJson)
+  if (response.ok) {
+    return queueLengthJson;
+  } else {
+    throw queueLengthJson;  // an object with the error coming from the server
+  }
+}
+
 async function getServices() {
 
   let response = await fetch(SERVER_URL + BASEURL + `/services`);
@@ -91,5 +103,5 @@ const getStatistics = async (filters) => {
   }
 }
 
-const API = { getStatistics, getQueues, getCountersTicket, getServices, createTicket };
+const API = { getStatistics, getQueues, getCountersTicket, getServices, createTicket, getQueueLength };
 export default API;
