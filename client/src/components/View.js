@@ -1,7 +1,7 @@
 import { Row, Col, Container, Button, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import NewTicket from '../NewTicket';
-import MainBoard from '../MainBoard';
+import NewTicket from './NewTicket';
+import MainBoard from './MainBoard';
 
 
 function DefaultRoute() {
