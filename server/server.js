@@ -91,8 +91,48 @@ app.get('/api/countersTicket', async (req, res) => {
         const currentCountersTicket = await dao.currentTicket();
         res.status(200).json(currentCountersTicket);
     } catch (err) {
-        res.status(500).end();
+        res.status(500).json("Internal server error");;
     }
+});
+
+// POST /api/countersTicket
+app.post('/api/statistics/', [], async (req, res) => {
+    let day;
+    let week;
+    let month;
+    let service;
+    let counter;
+    for(let i = 0; i < 5; i++){
+        if(req.body[i].day != undefined){
+            day = req.body[i].day;
+        }
+        if(req.body[i].week != undefined){
+            week = req.body[i].week;
+        }
+        if(req.body[i].month != undefined){
+            month = req.body[i].month;
+        }
+        if(req.body[i].service_type != undefined){
+            service = req.body[i].service_type;
+        }
+        if(req.body[i].counter != undefined){
+            counter = req.body[i].counter;
+        }
+    }
+    const filters = {
+        day: day,
+        week: week,
+        month: month,
+        counter: counter,
+        service: service
+    };
+
+    try {
+        const stats = await dao.statistics(filters);
+        res.status(200).json(stats).end();
+      } catch(err) {
+        res.status(500).json({error: 'Internal server error for statistics.'});
+      }
 });
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}/`));

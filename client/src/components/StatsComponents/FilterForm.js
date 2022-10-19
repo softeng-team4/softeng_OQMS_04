@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Col, Button, OverlayTrigger, Tooltip, DropdownButton, Dropdown, Row } from 'react-bootstrap';
+import { Card, Col, Button, OverlayTrigger, Tooltip, Dropdown } from 'react-bootstrap';
 import { ArrowClockwise, XCircle } from 'react-bootstrap-icons';
 
 const FilterForm = (props) => {
@@ -62,7 +62,7 @@ const FilterForm = (props) => {
                         </Dropdown>
                         &nbsp;
                         <OverlayTrigger placement='top' overlay={<Tooltip id={`tooltip-top`}>Reload Filters</Tooltip>}>
-                            <Button className='float-right' variant="success" type="submit" size='sm' form='statsForm' onClick={(ev) => { props.setUpdate(!props.update) }}><ArrowClockwise /></Button>
+                            <Button className='float-right' variant="success" type="submit" size='sm' form='statsForm' onClick={(ev) => { props.updateHandler() }}><ArrowClockwise /></Button>
                         </OverlayTrigger>
                     </Col>
                 </Card.Body>
