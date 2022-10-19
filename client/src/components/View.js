@@ -1,6 +1,6 @@
 import { Row, Col, Container, Button, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Statistics from '../Statistics';
+import Statistics from './StatsComponents/Statistics';
 
 
 function DefaultRoute() {

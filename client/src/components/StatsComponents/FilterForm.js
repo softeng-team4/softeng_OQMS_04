@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Col, Button, OverlayTrigger, Tooltip, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Card, Col, Button, OverlayTrigger, Tooltip, DropdownButton, Dropdown, Row } from 'react-bootstrap';
 import { ArrowClockwise, XCircle } from 'react-bootstrap-icons';
 
 const FilterForm = (props) => {
@@ -13,7 +13,7 @@ const FilterForm = (props) => {
 
     const changeFilters = (filterName, val) => {
         var temp = props.filters.filter(f => (Object.keys(f)[0] !== filterName))
-        temp = [...temp, {[filterName]: val}]
+        temp = [...temp, { [filterName]: val }]
         props.setFilters(temp)
     };
 
@@ -21,8 +21,8 @@ const FilterForm = (props) => {
         const timeFilterList = ['day', 'week', 'month']
         return !timeFilterList.includes(filterName) ? false :
             props.filters.filter(f => timeFilterList.includes(Object.keys(f)[0]))
-                         .map(f => Object.values(f)[0])
-                         .reduce((x,y) => (x + y), 0) > 0 ? true : false;
+                .map(f => Object.values(f)[0])
+                .reduce((x, y) => (x + y), 0) > 0 ? true : false;
     };
 
     return (
@@ -31,39 +31,43 @@ const FilterForm = (props) => {
             <Card>
                 <Card.Body className='d-flex justify-content-between'>
                     <Col className="d-flex justify-content-start">
-                        Selected filters: 
+                        Selected filters:
                         {props.filters
                             .filter(f => (Object.values(f)[0] === 1))
                             .map((f, idx) => {
-                                return  <>&nbsp;<Button key={'selB_'+Object.keys(f)[0]+'_'+idx} id={Object.keys(f)[0]} variant={colors[idx]} size={'sm'} onClick={(ev) => (changeFilters(ev.currentTarget.id, 0))}>
-                                            {Object.keys(f)[0].replace("_", " ") + " "}<XCircle key={'selX_'+Object.keys(f)[0]+'_'+idx}/>
-                                        </Button></> 
+                                return <>&nbsp;<Button key={'selB_' + Object.keys(f)[0] + '_' + idx} id={Object.keys(f)[0]} variant={colors[idx]} size={'sm'} onClick={(ev) => (changeFilters(ev.currentTarget.id, 0))}>
+                                    {Object.keys(f)[0].replace("_", " ") + " "}<XCircle key={'selX_' + Object.keys(f)[0] + '_' + idx} />
+                                </Button></>
                             })
                         }
                     </Col>
                     <Col className="d-flex justify-content-end">
-                        <DropdownButton className='d-flex jusify-content-start' title={"Add filter"} variant={'outline-secondary'} size={'sm'}>
-                        {props.filters
-                            .filter(f => (Object.values(f)[0] === 0))
-                            .map((f, idx) => {
-                                return  <>&nbsp;<Button key={'unselB_'+Object.keys(f)[0]+'_'+idx} id={Object.keys(f)[0]} variant={colors[idx]} size={'sm'} onClick={(ev) => (changeFilters(ev.currentTarget.id, 1))} disabled={checkIfAvailable(Object.keys(f)[0])}>
-                                            {Object.keys(f)[0].replace("_", " ")}
-                                        </Button></>
-                                        
-                            })
-                        }
-                        </DropdownButton>
+                        <Dropdown className='d-flex jusify-content-start' >
+                            <Dropdown.Toggle id="dropdown-basic" variant={'outline-secondary'} size={'sm'}>
+                                Add filter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu id="dropdown-menu-align-start">
+                                {props.filters
+                                    .filter(f => (Object.values(f)[0] === 0))
+                                    .map((f, idx) => {
+                                        return <Dropdown.ItemText>
+                                            <Button key={'unselB_' + Object.keys(f)[0] + '_' + idx} id={Object.keys(f)[0]} variant={colors[idx]} size={'sm'} onClick={(ev) => (changeFilters(ev.currentTarget.id, 1))} disabled={checkIfAvailable(Object.keys(f)[0])}>
+                                                {Object.keys(f)[0].replace("_", " ")}
+                                            </Button>
+                                        </Dropdown.ItemText>
+
+                                    })
+                                }
+                            </Dropdown.Menu>
+                        </Dropdown>
                         &nbsp;
                         <OverlayTrigger placement='top' overlay={<Tooltip id={`tooltip-top`}>Reload Filters</Tooltip>}>
-                            <Button className='float-right' variant="success" type="submit" size='sm' form='statsForm' onClick={(ev) => {props.setUpdate(!props.update)}}><ArrowClockwise/></Button>
+                            <Button className='float-right' variant="success" type="submit" size='sm' form='statsForm' onClick={(ev) => { props.setUpdate(!props.update) }}><ArrowClockwise /></Button>
                         </OverlayTrigger>
                     </Col>
                 </Card.Body>
             </Card>
             <div className='card-space'></div>
-            <Card>
-
-            </Card>
         </>
     );
 };
