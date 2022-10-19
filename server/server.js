@@ -134,3 +134,5 @@ app.put("/api/officer/ticket", async (req, res) => {
   }
 }
 )
+
+module.exports = app
