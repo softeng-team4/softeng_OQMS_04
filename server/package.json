@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon server.js",
-    "apiTest": "mocha"
+    "apiTest": "mocha test --runInBand--timeout 10000 --exit"
   },
   "author": "",
   "license": "ISC",

@@ -10,6 +10,7 @@ const TicketDAO = require('./dao/TicketDAO');
 const ServiceDAO = require('./dao/ServiceDAO');
 const CounterDAO = require('./dao/CounterDAO');
 const ServiceCounterDAO = require('./dao/Service-CounterDAO');
+const OfficerDAO = require('./dao/OfficerDAO');
 const dao = require('./dao/dao')
 const PORT = 3001;
 const corsOptions = {
@@ -25,6 +26,7 @@ const ticketDao = new TicketDAO("office.db");
 const serviceDao = new ServiceDAO("office.db");
 const counterDao = new CounterDAO("office.db");
 const serviceCounterDAO = new ServiceCounterDAO("office.db");
+const officerDao = new OfficerDAO("office.db");
 
 /*SERVICE APIs */
 
@@ -64,15 +66,15 @@ app.post('/api/ticket/:serviceId', async (req, res) => {
 
 /*  Queue API*/
 app.get('/api/queue/:serviceId', async (req, res) => {
-        try {
-            const queue = await ticketDao.getQueue(req.params.serviceId);
-            return res.status(200).json(queue);
-        }
-        catch (err) {
-            console.log(err);
-            return res.status(500).json("Internal server error");
-        }
-    })
+    try {
+        const queue = await ticketDao.getQueue(req.params.serviceId);
+        return res.status(200).json(queue);
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json("Internal server error");
+    }
+})
 
 // GET /api/countersTicket
 app.get('/api/countersTicket', async (req, res) => {
@@ -83,6 +85,22 @@ app.get('/api/countersTicket', async (req, res) => {
         res.status(500).end();
     }
 });
+
+/*** Officer APIs ***/
+
+// PUT /api/officer/ticket
+app.put("/api/officer/ticket", async (req, res) => {
+    try {
+        const result = await officerDao.nextTicket(req.body.counter, req.body.served);
+        const resBody = {
+            next: result
+        }
+        return res.status(200).json(resBody)
+    }
+    catch (err) {
+        return res.status(500).end()
+    }
+})
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}/`));
 module.exports = app;
