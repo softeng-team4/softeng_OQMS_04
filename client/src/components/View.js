@@ -22,18 +22,28 @@ function DefaultRoute() {
 
 function AppLayout(props) {
     return (
-        <Container>
-            <Row>
-                <Link to="/getTicket"><Button variant="outline-primary">Get Ticket</Button></Link>
+        <Container style={{ borderRadius: 20, borderColor: 'grey', borderWidth: 2, borderStyle: 'double', marginTop: 200, padding: 50 }}>
+            <Container>
+                <Row style={{ marginTop: 50, marginBottom: 50, marginLeft: 200, marginRight: 200 }}>
+                    <Col>
 
-                <Link to='/statistics'><Button variant="outline-secondary">Show statistics</Button></Link>
-            </Row>
-            <Row>
-                <Link to='/display'><Button variant="outline-success">Display screen</Button></Link>
-
-                <Link to='/nextCustomer'><Button variant="outline-warning">next Customer</Button></Link>
-
-            </Row>
+                        <Link to="/getTicket"><Button variant="outline-primary" size='lg'>Get Ticket</Button></Link>
+                    </Col>
+                    <Col>
+                        <Link to='/statistics'><Button variant="outline-secondary" size='lg'>Show statistics</Button></Link>
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+                <Row style={{ marginTop: 50, marginBottom: 50, marginLeft: 200, marginRight: 200 }}>
+                    <Col >
+                        <Link to='/display'><Button variant="outline-success" size='lg'>Display screen</Button></Link>
+                    </Col>
+                    <Col>
+                        <Link to='/nextCustomer'><Button variant="outline-warning" size='lg'>next Customer</Button></Link>
+                    </Col>
+                </Row>
+            </Container>
         </Container>
     );
 }
@@ -69,13 +79,18 @@ function DisplayRoute(props) {
                         </Navbar.Brand>
                         <Link to="/"><Button variant='danger'>Back</Button></Link>
 
-                </Container>
-            </Navbar>
+                    </Container>
+                </Navbar>
             </Row>
-
-            <MainBoard />
             <Row>
-                <ShowQueue services={props.services}/>
+                <Container>
+                    <MainBoard />
+                </Container>
+            </Row>
+            <Row>
+                <Container>
+                    <ShowQueue services={props.services} />
+                </Container>
             </Row>
         </Container>
 
@@ -114,7 +129,7 @@ function StatisticsRoute(props) {
                 </Navbar>
             </Container>
             <Container fluid>
-                <Statistics/>
+                <Statistics />
             </Container>
         </>
     );
