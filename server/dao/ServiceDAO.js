@@ -13,7 +13,7 @@ class ServiceDAO{
 
     newServicesTable = () =>{
         return new Promise((resolve,reject) =>{
-            const sql = 'CREATE TABLE IF NOT EXISTS services (id INTEGER PRIMARY KEY, name TEXT NOT NULL, service_time TEXT NOT NULL);';
+            const sql = 'CREATE TABLE IF NOT EXISTS services (id INTEGER PRIMARY KEY, name TEXT NOT NULL, service_time NUMBER NOT NULL);';
             this.db.run(sql,(err) =>{
                 if(err)
                     reject(err);

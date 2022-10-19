@@ -16,7 +16,7 @@ var agent = chai.request.agent(app);
 
 describe('testing the server on the interaction with the customer',() =>{
 
-    beforeEach(async () =>{
+    before(async () =>{
         
         const ticketDao = new TicketDAO("office.db");
         const serviceDao = new ServiceDAO("office.db");
@@ -43,11 +43,11 @@ describe('testing the server on the interaction with the customer',() =>{
     })
 
     ticketTest(1,1,5);
-    ticketTest(1,2,10*(1/1.5 + 0.5));
-    ticketTest(2,3,15/2);
+    ticketTest(1,2,12);
+    ticketTest(2,3,8);
     ticketTest(3,4,10);
     wrongTicketTest(4);
-    serviceListTest([{id:1, name: "mailbox", service_time: 10},{id:2, name: "accounts", service_time: 15},{id:3, name: "transactions", service_time: 20}],4);
+    serviceListTest([{id:1, name: "mailbox", service_time: 10},{id:2, name: "accounts", service_time: 15},{id:3, name: "transactions", service_time: 20}],3);
 })
 
 function ticketTest(service, expNum, expWaitTime){
