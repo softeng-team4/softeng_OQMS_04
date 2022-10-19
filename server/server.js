@@ -52,7 +52,7 @@ app.post('/api/ticket/:serviceId', async (req, res) => {
         for (let n of nServices) {
             waitTime += 1 / n;
         }
-        waitTime = service.service_time * (nPeople / waitTime + 0.5);
+        waitTime = Math.round(service.service_time * (nPeople / waitTime + 0.5));
         const ticketNumber = await ticketDao.createTicket(req.params.serviceId, waitTime);
         return res.status(201).json({ num: ticketNumber, waitTime: waitTime });
     }

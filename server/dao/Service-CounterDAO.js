@@ -26,7 +26,7 @@ class ServiceCounterDAO{
 
     getNServicesCountersWService = (service) =>{
         return new Promise((resolve,reject) =>{
-            const sql = 'SELECT COUNT(*) as N FROM service_counter WHERE EXISTS(SELECT counterId FROM service_counter WHERE serviceId = ?) GROUP BY counterId;';
+            const sql = 'SELECT COUNT(*) as N FROM service_counter WHERE counterId IN (SELECT counterId FROM service_counter WHERE serviceId = ?) GROUP BY counterId;';
             this.db.all(sql,[service],(err,rows) =>{
                 if(err)
                     reject(err);

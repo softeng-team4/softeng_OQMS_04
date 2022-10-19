@@ -1,0 +1,14 @@
+Server running on http://localhost:3001/
+
+
+  testing the server on the interaction with the customer
+    ✔ Customer getting a ticket for service 1 (135ms)
+    ✔ Customer getting a ticket for service 1 (97ms)
+    ✔ Customer getting a ticket for service 2 (96ms)
+    ✔ Customer getting a ticket for service 3 (71ms)
+    ✔ Customer asking for non-existent service 4
+    ✔ testing the service list
+
+
+  6 passing (2s)
+
