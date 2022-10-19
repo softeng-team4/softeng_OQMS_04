@@ -6,22 +6,24 @@ function ShowQueue(props) {
 
     return (
         <>
-            <Row>
-                <Container >
-                    <div className="fw-bold" style={{ color: 'red' }}>Waiting Line</div>
-                    <Table striped hover>
-                        <thead>
-                            <tr>
-                                <th>Service Name</th>
-                                <th>Waiting People</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {props.services.map((service) => <ServiceRow service={service} key={service.id} />)}
-                        </tbody>
-                    </Table>
+
+            <Container style={{ borderRadius: 20, borderColor: 'orange', borderWidth: 2, borderStyle: 'double', marginTop: 100, padding: 50 }}>
+                <Container className='center'>
+                <div className="fw-bold" style={{ color: 'red', marginBottom: 20 }}>Waiting Line</div>
                 </Container>
-            </Row>
+                <Table striped>
+                    <thead>
+                        <tr>
+                            <th>Service Name</th>
+                            <th>Waiting People</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.services.map((service) => <ServiceRow service={service} key={service.id} />)}
+                    </tbody>
+                </Table>
+            </Container>
+
 
         </>
     );
@@ -55,7 +57,7 @@ function ServiceRow(props) {
             <tr>
                 <th>{props.service.name}</th>
                 <th>{queues === '' ? 0 : queueLength}</th>
-        
+
             </tr>
 
 

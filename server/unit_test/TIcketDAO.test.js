@@ -6,11 +6,11 @@ describe('getQueue', () => {
 
     // TEST CASE exists
     test('Queue', async () => {
-        const samplePosition = {
+        const sampleQueue = {
             "id": 1,
         };
         let queue = await ticketDao.getQueue(1);
-        expect(queue[0].id).toStrictEqual(samplePosition.id);
+        expect(queue[0].id).toStrictEqual(sampleQueue.id);
 
     });
 
@@ -23,3 +23,25 @@ describe('getQueue', () => {
     });
 
 });
+
+//TEST SUITE getQueueLength
+describe('getQueueLength', () => {
+
+    // TEST CASE exists
+    test('QueueLength', async () => {
+        const sampleQueueLength = 4;
+        let queue = await ticketDao.getQueueLength(1);
+        expect(queue).toStrictEqual(sampleQueueLength);
+
+    });
+
+    // TEST CASE not exists
+    test('not existing Queue', async () => {
+        let result = await ticketDao.getQueueLength(0);
+        expect(result).toStrictEqual(0);
+        result = await ticketDao.getQueueLength(Number.MAX_VALUE);
+        expect(result).toStrictEqual(0);
+    });
+
+});
+
