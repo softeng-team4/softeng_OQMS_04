@@ -1,5 +1,7 @@
 import { Row, Col, Container, Button, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import NewTicket from './NewTicket';
+import MainBoard from './MainBoard';
 
 import DisplayScreen from "./DisplayScreen"
 import ShowQueue from './ShowQueue';
@@ -49,7 +51,7 @@ function TicketRoute(props) {
 
                 </Container>
             </Navbar>
-
+            <NewTicket />
         </Container>
 
     );
@@ -67,12 +69,11 @@ function DisplayRoute(props) {
                         </Navbar.Brand>
                         <Link to="/"><Button variant='danger'>Back</Button></Link>
 
-                    </Container>
-                </Navbar>
+                </Container>
+            </Navbar>
             </Row>
-            <Row>
-                <DisplayScreen displays={props.display} />
-            </Row>
+
+            <MainBoard />
             <Row>
                 <ShowQueue queues={props.queues} services={props.services}/>
             </Row>

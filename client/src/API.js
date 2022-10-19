@@ -42,7 +42,27 @@ async function getServices() {
   }
 }
 
-// setInterval(getCountersTicket, 2000);
 
-const API = { getCountersTicket, getQueues, getServices };
+async function createTicket(serviceId) {
+  const url = SERVER_URL + '/api/ticket/' + serviceId;
+  try {
+      const response = await fetch(url, {
+          method: 'POST',
+      });
+      if (response.ok) {
+        let ticket = await response.json();
+        console.log(ticket);
+        return ticket;
+      } else {
+        const text = await response.text();
+        console.log(text);
+        throw new TypeError(text);
+      }
+  } catch (ex) {
+      console.log(ex);
+      throw ex;
+  }
+}
+
+const API = { logIn, getUserInfo, logOut, getAllServices, createTicket };
 export default API;
