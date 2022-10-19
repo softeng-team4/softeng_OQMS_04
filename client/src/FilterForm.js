@@ -1,20 +1,8 @@
-import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Col, Button, OverlayTrigger, Tooltip, DropdownButton, Dropdown } from 'react-bootstrap';
 import { ArrowClockwise, XCircle } from 'react-bootstrap-icons';
 
 const FilterForm = (props) => {
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     const form = event.currentTarget;
-    //     if(form.checkValidity() == false) {
-    //         event.stopPropagation()
-    //         setISValid(true);
-    //     } else {
-    //         setISValid(flase)
-    //     }
-    // };
 
     const colors = {
         0: 'primary',
@@ -24,10 +12,17 @@ const FilterForm = (props) => {
     }
 
     const changeFilters = (filterName, val) => {
-        console.log(filterName)
         var temp = props.filters.filter(f => (Object.keys(f)[0] !== filterName))
         temp = [...temp, {[filterName]: val}]
         props.setFilters(temp)
+    };
+
+    const checkIfAvailable = (filterName) => {
+        const timeFilterList = ['day', 'week', 'month']
+        return !timeFilterList.includes(filterName) ? false :
+            props.filters.filter(f => timeFilterList.includes(Object.keys(f)[0]))
+                         .map(f => Object.values(f)[0])
+                         .reduce((x,y) => (x + y), 0) > 0 ? true : false;
     };
 
     return (
@@ -47,15 +42,14 @@ const FilterForm = (props) => {
                         }
                     </Col>
                     <Col className="d-flex justify-content-end">
-                        <DropdownButton title={"Add filter"} variant={'outline-secondary'} size={'sm'}>
+                        <DropdownButton className='d-flex jusify-content-start' title={"Add filter"} variant={'outline-secondary'} size={'sm'}>
                         {props.filters
                             .filter(f => (Object.values(f)[0] === 0))
                             .map((f, idx) => {
-                                return  <Dropdown.Item key={'unselD_'+Object.keys(f)[0]+'_'+idx}>
-                                            <Button key={'unselB_'+Object.keys(f)[0]+'_'+idx} id={Object.keys(f)[0]} variant={colors[idx]} size={'sm'} onClick={(ev) => (changeFilters(ev.currentTarget.id, 1))}>
-                                                {Object.keys(f)[0].replace("_", " ")}
-                                            </Button>
-                                        </Dropdown.Item>
+                                return  <>&nbsp;<Button key={'unselB_'+Object.keys(f)[0]+'_'+idx} id={Object.keys(f)[0]} variant={colors[idx]} size={'sm'} onClick={(ev) => (changeFilters(ev.currentTarget.id, 1))} disabled={checkIfAvailable(Object.keys(f)[0])}>
+                                            {Object.keys(f)[0].replace("_", " ")}
+                                        </Button></>
+                                        
                             })
                         }
                         </DropdownButton>
