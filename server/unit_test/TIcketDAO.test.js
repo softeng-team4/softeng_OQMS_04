@@ -29,7 +29,7 @@ describe('getQueueLength', () => {
 
     // TEST CASE exists
     test('QueueLength', async () => {
-        const sampleQueueLength = 4;
+        const sampleQueueLength = 5;
         let queue = await ticketDao.getQueueLength(1);
         expect(queue).toStrictEqual(sampleQueueLength);
 
