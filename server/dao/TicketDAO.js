@@ -20,7 +20,7 @@ class TicketDAO{
 
     newTicketsTable = () =>{
         return new Promise((resolve,reject) =>{
-            const sql = 'CREATE TABLE IF NOT EXISTS tickets (id INTEGER PRIMARY KEY AUTOINCREMENT, service INTEGER, date TEXT, time TEXT, week TEXT, month TEXT, exp_waitTime TEXT, completed INTEGER NOT NULL, act_waitTime TEXT, counter_id INTEGER);';
+            const sql = 'CREATE TABLE IF NOT EXISTS tickets (id INTEGER PRIMARY KEY, service INTEGER, date TEXT, time TEXT, week TEXT, month TEXT, exp_waitTime TEXT, completed INTEGER NOT NULL, act_waitTime TEXT, counter_id INTEGER);';
             this.db.run(sql,(err) =>{
                 if(err)
                     reject(err);
@@ -78,6 +78,18 @@ class TicketDAO{
                     reject(err);
                 else
                     resolve(row);
+            })
+        })
+    }
+
+    deleteAllTickets = () =>{
+        return new Promise((resolve,reject) =>{
+            const sql = 'DELETE FROM tickets;';
+            this.db.get(sql,(err) =>{
+                if(err)
+                    reject(err);
+                else
+                    resolve();
             })
         })
     }

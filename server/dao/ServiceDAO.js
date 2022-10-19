@@ -13,7 +13,7 @@ class ServiceDAO{
 
     newServicesTable = () =>{
         return new Promise((resolve,reject) =>{
-            const sql = 'CREATE TABLE IF NOT EXISTS services (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, service_time TEXT NOT NULL);';
+            const sql = 'CREATE TABLE IF NOT EXISTS services (id INTEGER PRIMARY KEY, name TEXT NOT NULL, service_time TEXT NOT NULL);';
             this.db.run(sql,(err) =>{
                 if(err)
                     reject(err);
@@ -48,6 +48,30 @@ class ServiceDAO{
                     reject(err);
                 else
                     resolve(row);
+            })
+        })
+    }
+
+    addService = (name,time) =>{
+        return new Promise((resolve,reject)=>{
+            const sql = 'INSERT INTO services(name,service_time) VALUES(?,?);';
+            this.db.run(sql,[name,time],(err)=>{
+                if(err)
+                    reject(err);
+                else
+                    resolve(this.lastID);
+            })
+        })
+    }
+
+    deleteAllServices = () =>{
+        return new Promise((resolve,reject) =>{
+            const sql = 'DELETE FROM services;';
+            this.db.get(sql,(err) =>{
+                if(err)
+                    reject(err);
+                else
+                    resolve();
             })
         })
     }

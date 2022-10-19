@@ -13,7 +13,7 @@ class CounterDAO{
 
     newCountersTable = () =>{
         return new Promise((resolve,reject) =>{
-            const sql = 'CREATE TABLE IF NOT EXISTS counters (id INTEGER PRIMARY KEY AUTOINCREMENT, open INTEGER NOT NULL);';
+            const sql = 'CREATE TABLE IF NOT EXISTS counters (id INTEGER PRIMARY KEY, open INTEGER NOT NULL);';
             this.db.run(sql,(err) =>{
                 if(err)
                     reject(err);
@@ -35,6 +35,30 @@ class CounterDAO{
     //         })
     //     })
     // }
+
+    addCounter = () =>{
+        return new Promise((resolve,reject)=>{
+            const sql = 'INSERT INTO counters(open) VALUES(1);';
+            this.db.run(sql,(err)=>{
+                if(err)
+                    reject(err);
+                else
+                    resolve(this.lastID);
+            })
+        })
+    }
+
+    deleteAllCounters = () =>{
+        return new Promise((resolve,reject) =>{
+            const sql = 'DELETE FROM counters;';
+            this.db.get(sql,(err) =>{
+                if(err)
+                    reject(err);
+                else
+                    resolve();
+            })
+        })
+    }
 
 }
 

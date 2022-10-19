@@ -13,7 +13,7 @@ class ServiceCounterDAO{
 
     newServiceCounterTable = () =>{
         return new Promise((resolve,reject) =>{
-            const sql = 'CREATE TABLE IF NOT EXISTS service_counter (id INTEGER PRIMARY KEY AUTOINCREMENT, serviceId INTEGER NOT NULL, counterId INTEGER NOT NULL);';
+            const sql = 'CREATE TABLE IF NOT EXISTS service_counter (id INTEGER PRIMARY KEY, serviceId INTEGER NOT NULL, counterId INTEGER NOT NULL);';
             this.db.run(sql,(err) =>{
                 if(err)
                     reject(err);
@@ -36,6 +36,30 @@ class ServiceCounterDAO{
                         counts.push(row.N);
                     resolve(counts);
                 }
+            })
+        })
+    }
+
+    addServiceCounter = (service,counter) =>{
+        return new Promise((resolve,reject)=>{
+            const sql = 'INSERT INTO service_counter(serviceId,counterId) VALUES(?,?);';
+            this.db.run(sql,[service,counter],(err)=>{
+                if(err)
+                    reject(err);
+                else
+                    resolve(this.lastID);
+            })
+        })
+    }
+
+    deleteAllServiceCounters = () =>{
+        return new Promise((resolve,reject) =>{
+            const sql = 'DELETE FROM service_counter;';
+            this.db.get(sql,(err) =>{
+                if(err)
+                    reject(err);
+                else
+                    resolve();
             })
         })
     }
