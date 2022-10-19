@@ -23,3 +23,70 @@ exports.currentTicket = () => {
         });
     });
 };
+
+exports.statistics = (filters) => {
+    return new Promise((resolve, reject) => {
+        let select = '';
+        let groupby = '';
+        let orderby = '';
+        if(filters.day == 1){
+            select += ', date AS time_period';
+            groupby += 'date';
+            orderby += 'date';
+            
+        }
+        if(filters.week == 1){
+            select += ', week AS time_period';
+            groupby += 'week';
+            orderby += 'week';
+            
+        }
+        if(filters.month == 1){
+            select += ', month AS time_period';
+            groupby += 'month';
+            orderby += 'month';
+            
+        }
+        if(filters.counter == 1){
+            select += ', counter_id';
+            if(groupby.length > 0){
+                groupby += ', counter_id';
+            }else{
+                groupby += 'counter_id';
+            }
+            if(orderby.length > 0){
+                orderby += ', counter_id';
+            }else{
+                orderby += 'counter_id';
+            }
+            
+        }
+        if(filters.service == 1){
+            select += ', service';
+            if(groupby.length > 0){
+                groupby += ', service';
+            }else{
+                groupby += 'service';
+            }
+            if(orderby.length > 0){
+                orderby += ', service';
+            }else{
+                orderby += 'service';
+            }
+        }
+        let sql = '';
+        if(groupby.length >0){
+            sql = 'SELECT COUNT(id) AS ticketsNumber'+select+' FROM tickets WHERE completed =1 GROUP BY '+groupby+' ORDER BY '+orderby+'';
+        }else{
+            sql = 'SELECT COUNT(id) AS ticketsNumber'+select+' FROM tickets WHERE completed =1';
+        }
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const tNumber = rows.map((t) => ({ticketsNumber: t.ticketsNumber, tos: t.service === undefined ? null : t.service , counterId: t.counter_id === undefined ? null : t.counter_id, date: t.time_period === undefined ? null : t.time_period}));
+            resolve(tNumber);
+        });
+    });
+};

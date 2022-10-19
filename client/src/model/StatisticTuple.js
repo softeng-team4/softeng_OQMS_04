@@ -23,7 +23,7 @@ class StatisticTuple {
      * @returns {StatisticTuple} new tuple object
      */
     static from(json) {
-        return new StatisticTuple(json.conterId, json.tos, json.date, json.ticketsNumber);
+        return new StatisticTuple(json.counterId, json.tos, json.date, json.ticketsNumber);
     }
 }
 

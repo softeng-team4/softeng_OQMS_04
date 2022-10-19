@@ -35,13 +35,13 @@ const Statistics = () => {
 
     // get stats from server
     useEffect(() => {
-        // API.getStatistics(filters).then((tuples) => {
-        //     setTuples(tuples);
-        //     setIsLoading(false);
-        // }).catch(err => {
-        //     setServerError(err.error);
-        //     setIsLoading(false);
-        // });
+        API.getStatistics(filters).then((tuples) => {
+            setTuples(tuples);
+            setIsLoading(false);
+        }).catch(err => {
+            setServerError(err.error);
+            setIsLoading(false);
+        });
         setFilters(formFilters);
         console.log("Works!")
         setIsLoading(false);

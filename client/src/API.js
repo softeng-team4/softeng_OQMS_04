@@ -69,7 +69,7 @@ async function createTicket(serviceId) {
 // Manager Statistics APIs
 
 const getStatistics = async (filters) => {
-  const url = '/api/statistics/';
+  const url = SERVER_URL + '/api/statistics/';
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
