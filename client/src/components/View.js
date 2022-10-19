@@ -119,7 +119,7 @@ function NextRoute(props) {
 
                 </Container>
             </Navbar>
-            <OfficerInterface />
+            <OfficerInterface displays={props.display}/>
         </Container>
 
     );
