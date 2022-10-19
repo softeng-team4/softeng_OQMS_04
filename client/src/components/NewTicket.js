@@ -22,7 +22,7 @@ function NewTicket(props) {
     }, []);
 
     const reloadServices = () => {
-        API.getAllServices().then(list => {
+        API.getServices().then(list => {
             setServiceList(list);
         }).catch(err => {
             setServiceList([]);

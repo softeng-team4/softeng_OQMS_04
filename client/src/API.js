@@ -34,7 +34,7 @@ async function getQueues(service) {
 
 async function getServices() {
 
-  let response = await fetch(SERVER_URL + BASEURL + `/services` );
+  let response = await fetch(SERVER_URL + BASEURL + `/services`);
   let queuesJson = await response.json();
 
   if (response.ok) {
@@ -48,21 +48,21 @@ async function getServices() {
 async function createTicket(serviceId) {
   const url = SERVER_URL + '/api/ticket/' + serviceId;
   try {
-      const response = await fetch(url, {
-          method: 'POST',
-      });
-      if (response.ok) {
-        let ticket = await response.json();
-        console.log(ticket);
-        return ticket;
-      } else {
-        const text = await response.text();
-        console.log(text);
-        throw new TypeError(text);
-      }
+    const response = await fetch(url, {
+      method: 'POST',
+    });
+    if (response.ok) {
+      let ticket = await response.json();
+      console.log(ticket);
+      return ticket;
+    } else {
+      const text = await response.text();
+      console.log(text);
+      throw new TypeError(text);
+    }
   } catch (ex) {
-      console.log(ex);
-      throw ex;
+    console.log(ex);
+    throw ex;
   }
 }
 
@@ -91,5 +91,5 @@ const getStatistics = async (filters) => {
   }
 }
 
-const API = { logIn, getUserInfo, logOut, getStatistics };
+const API = { getStatistics, getQueues, getCountersTicket, getServices, createTicket };
 export default API;

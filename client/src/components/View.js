@@ -4,7 +4,6 @@ import Statistics from './StatsComponents/Statistics';
 import NewTicket from './NewTicket';
 import MainBoard from './MainBoard';
 
-import DisplayScreen from "./DisplayScreen"
 import ShowQueue from './ShowQueue';
 
 
