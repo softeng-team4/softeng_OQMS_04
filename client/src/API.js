@@ -70,24 +70,30 @@ async function createTicket(serviceId) {
 
 const getStatistics = async (filters) => {
   const url = SERVER_URL + '/api/statistics/';
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(filters)
-  });
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(filters)
+    });
 
-  if (!response.ok) {
-    try {
-      let errDetail = await response.json();
-      throw new Error(errDetail);
+    if (!response.ok) {
+      try {
+        let errDetail = await response.json();
+        throw new Error(errDetail);
+      }
+      catch (err) {
+        const errDetail = { error: 'Server Unreachable' };
+        throw errDetail;
+      }
+    } else {
+      const jsonManagerStats = await response.json();
+      return jsonManagerStats.map(s => StatisticTuple.from(s));
     }
-    catch (err) {
-      const errDetail = { error: 'Server Unreachable' };
-      throw errDetail;
-    }
-  } else {
-    const jsonManagerStats = await response.json();
-    return jsonManagerStats.map(s => StatisticTuple.from(s));
+
+  }
+  catch (err) {
+    throw { error: 'Server Unreachable' };
   }
 }
 

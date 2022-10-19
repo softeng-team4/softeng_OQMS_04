@@ -30,7 +30,7 @@ const Statistics = () => {
             setServerError(err.error);
             setIsLoading(false);
         });
-    }, [serverError, filters]);
+    }, [filters]);
 
     const updateHandler = () => {
         setFilters(formFilters);
