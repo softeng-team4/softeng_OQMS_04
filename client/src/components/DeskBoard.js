@@ -1,19 +1,20 @@
 import Card from 'react-bootstrap/Card';
 
 function DeskBoard(props) {
-    return (
-        <Card>
-            {// use props.desk to get data
-            }
-          <Card.Header as="h4">DeskName</Card.Header>
-          <Card.Body>
-            <Card.Title>We are serving <i><b>T1</b></i></Card.Title>
-            <Card.Text>
-              Supported services list
-            </Card.Text>
-          </Card.Body>
-        </Card>
-    );
+  // se desk in previousList then evidenzia
+  const isNew = props.previousList.length !== 0 && props.previousList.find(d => {
+    return d.counter_id === props.desk.counter_id && d.ticket_id === props.desk.ticket_id
+  });
+  
+  return (
+      <Card align='center' style={isNew === undefined ? { backgroundColor: 'Yellow' } : {}}>
+        <Card.Header as="h4">{"Counter " + props.desk.counter_id}</Card.Header>
+        <Card.Body>
+          <Card.Title>We are serving</Card.Title>
+          <Card.Title>Ticket #<i><b>{props.desk.ticket_id}</b></i></Card.Title>
+        </Card.Body>
+      </Card>
+  );
 }
 
 export default DeskBoard;

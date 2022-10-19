@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Statistics from './StatsComponents/Statistics';
 import NewTicket from './NewTicket';
 import MainBoard from './MainBoard';
-
+import OfficerInterface from './OfficerInterface';
 import ShowQueue from './ShowQueue';
 
 
@@ -110,6 +110,7 @@ function NextRoute(props) {
 
                 </Container>
             </Navbar>
+            <OfficerInterface/>
         </Container>
 
     );

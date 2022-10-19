@@ -36,7 +36,7 @@ async function getQueueLength(service) {
 
   let response = await fetch(SERVER_URL + BASEURL + `/queue/length/` + service);
   let queueLengthJson = await response.json();
-console.log('api',queueLengthJson)
+  console.log('api', queueLengthJson)
   if (response.ok) {
     return queueLengthJson;
   } else {
@@ -78,6 +78,18 @@ async function createTicket(serviceId) {
   }
 }
 
+async function getCurrentTickets() {
+
+  let response = await fetch(SERVER_URL + BASEURL + `/countersTicket`);
+  let ticketList = await response.json();
+
+  if (response.ok) {
+    return ticketList;
+  } else {
+    throw ticketList;  // an object with the error coming from the server
+  }
+}
+
 // Manager Statistics APIs
 
 const getStatistics = async (filters) => {
@@ -103,5 +115,5 @@ const getStatistics = async (filters) => {
   }
 }
 
-const API = { getStatistics, getQueues, getCountersTicket, getServices, createTicket, getQueueLength };
+const API = { getStatistics, getQueues, getCountersTicket, getServices, createTicket, getCurrentTickets, getQueueLength };
 export default API;
