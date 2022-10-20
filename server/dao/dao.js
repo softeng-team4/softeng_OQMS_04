@@ -18,8 +18,8 @@ exports.currentTicket = () => {
                 reject(err);
                 return;
             }
-            const surveys = rows.map((t) => ({ticket_id: t.ticket_id, counter_id: t.counter_id}));
-            resolve(surveys);
+            const cTickets = rows.map((t) => ({ticket_id: t.ticket_id, counter_id: t.counter_id}));
+            resolve(cTickets);
         });
     });
 };
@@ -62,7 +62,7 @@ exports.statistics = (filters) => {
             
         }
         if(filters.service == 1){
-            select += ', service';
+            select += ', services.name AS serviceName';
             if(groupby.length > 0){
                 groupby += ', service';
             }else{
@@ -76,7 +76,7 @@ exports.statistics = (filters) => {
         }
         let sql = '';
         if(groupby.length >0){
-            sql = 'SELECT COUNT(id) AS ticketsNumber'+select+' FROM tickets WHERE completed =1 GROUP BY '+groupby+' ORDER BY '+orderby+'';
+            sql = 'SELECT COUNT(tickets.id) AS ticketsNumber'+select+' FROM tickets, services WHERE completed =1 AND tickets.service = services.id GROUP BY '+groupby+' ORDER BY '+orderby;
         }else{
             sql = 'SELECT COUNT(id) AS ticketsNumber'+select+' FROM tickets WHERE completed =1';
         }
@@ -85,7 +85,7 @@ exports.statistics = (filters) => {
                 reject(err);
                 return;
             }
-            const tNumber = rows.map((t) => ({ticketsNumber: t.ticketsNumber, tos: t.service === undefined ? null : t.service , counterId: t.counter_id === undefined ? null : t.counter_id, date: t.time_period === undefined ? null : t.time_period}));
+            const tNumber = rows.map((t) => ({ticketsNumber: t.ticketsNumber, tos: t.serviceName === undefined ? null : t.serviceName , counterId: t.counter_id === undefined ? null : t.counter_id, date: t.time_period === undefined ? null : t.time_period}));
             resolve(tNumber);
         });
     });
