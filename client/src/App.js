@@ -39,7 +39,7 @@ function App() {
           <Route path='/getTicket' element={<TicketRoute />}> </Route>
           <Route path='/statistics' element={<StatisticsRoute />}> </Route>
           <Route path='/display' element={<DisplayRoute services={services} display={display} />}> </Route>
-          <Route path='/nextCustomer' element={<NextRoute display={display} />}> </Route>
+          <Route path='/nextCustomer' element={<NextRoute />}> </Route>
 
 
 

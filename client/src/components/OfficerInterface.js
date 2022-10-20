@@ -3,17 +3,9 @@ import Button from "react-bootstrap/esm/Button";
 import Container from "react-bootstrap/esm/Container"
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import OfficerAPI from "../officerAPI";
 
 function OfficerInterface(props) {
-    const nextTicket = async (counterId, ticketId) => {
-        try {
-            await OfficerAPI.nextTicket(counterId, ticketId);
-        } catch (e) {
-            console.log(e);
-            throw (e);
-        }
-    }
+    const [counterList, setCounterList] = useState([1, 2, 3]);
 
     return (
         <>
@@ -21,11 +13,11 @@ function OfficerInterface(props) {
                 <Tabs
                     id="counter-tab"
                     className="mb-3">
-                    {props.displays.map(display =>
-                        <Tab key={display} eventKey={display.counterId} title={"Counter " + display.counterId}>
-                            <h5 align='center' style={{ padding: 20 }}>Serving customer <i><b>{display.ticketId}</b></i></h5>
+                    {counterList.map(counter =>
+                        <Tab key={counter} eventKey={counter} title={"Counter " + counter}>
+                            <h5 align='center' style={{ padding: 20 }}>Serving customer <i><b>T1</b></i></h5>
                             <div align='right'>
-                                <Button variant="outline-success" onClick={() => nextTicket(display.counterId, display.ticketId)}>
+                                <Button variant="outline-success">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="16"
