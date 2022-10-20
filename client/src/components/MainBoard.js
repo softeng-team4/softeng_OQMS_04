@@ -10,19 +10,24 @@ function MainBoard(props) {
     let prevList = [];
 
     useEffect(() => {
+        refreshList();
         const timerId = setInterval(() => {
-            API.getCurrentTickets().then(list => {
-                setPreviousList(prevList);
-                prevList = list;
-                setDeskList(list);
-            }).catch(err => {
-                console.log(err);
-            });
+            refreshList();
         }, 3000);
         return () => {
             clearInterval(timerId);
         }
     }, []);
+
+    const refreshList = () => {
+        API.getCurrentTickets().then(list => {
+            setPreviousList(prevList);
+            prevList = list;
+            setDeskList(list);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 
     return <Container className="center" style={{ padding: 20}}>
         <ListGroup horizontal>
