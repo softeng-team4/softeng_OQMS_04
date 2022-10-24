@@ -19,7 +19,9 @@ sections:
   - 25 points committed vs 22 done
 
 - Nr of hours planned vs. spent (as a team)
-  - 54 hours planned vs 45 hours spent
+  - 54 hours planned vs 47 hours and 55 minutes spent
+
+Note: We added a "GIT Management" task during the sprint, which led us from 48h to 54h planned.
 
 **Remember** a story is done ONLY if it fits the Definition of Done:
  
@@ -34,23 +36,22 @@ sections:
 
 | Story           | # Tasks | Points | Hours est. | Hours actual |
 | --------------- | ------- | ------ | ---------- | ------------ |
-| _#0_            | 4       |        | 13         | 13           |
-| Get a ticket    | 3       | 8      | 8          | 9            |
-| Notify turn     | 3       | 3      | 10         | 3            |
-| Show queue      | 3       | 3      | 5          | 3.5          |
-| Show statistics | 3       | 8      | 10         | 10.5         |
-| Next customer   | 3       | 3      | 8          | 6            |
+| _#0_            | 4       |        | 13h        | 12h 50m      |
+| Get a ticket    | 3       | 8      | 8h         | 9h 35m       |
+| Notify turn     | 3       | 3      | 10h        | 4h 10m       |
+| Show queue      | 3       | 3      | 5h         | 4h           |
+| Next customer   | 3       | 3      | 8h         | 6h 50m       |
+| Show statistics | 3       | 8      | 10h        | 10h 30m      |
    
 
 > place technical tasks corresponding to story `#0` and leave out story points (not applicable in this case)
 
 - Hours per task average, standard deviation (estimate and actual)
-  - Hours per task: 45 / 19 = 2.37
-  - Estimated standard deviation: 6
-  - Actual standard deviation: 13.33
+  - Hours per task: 48 / 19 = 2.53
+  - Estimated standard deviation: 2.45
+  - Actual standard deviation: 3.33
 - Total task estimation error ratio: sum of total hours estimation / sum of total hours spent - 1
-  - 54 / 45 - 1 = 0.23
-
+  - 54 / 48 - 1 = 0.125
   
 ## QUALITY MEASURES 
 
@@ -66,8 +67,6 @@ sections:
   - Total hours estimated ： 6
   - Total hours spent：4.17
   
-
-
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?
@@ -88,10 +87,11 @@ sections:
 
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
 
-  - Properly defining the level of priority of each story;
-  - Correctly identifying which tasks are cross-cutting;
-  - Put more effort in design;
-  - Concentrate everyone on the higher priority tasks first, in order to do not waste anyone's work;
+  - Properly defining the level of priority of each story
+  - Correctly identifying which tasks are cross-cutting
+  - Put more effort in design
+  - Concentrate everyone on the higher priority tasks first, in order to do not waste anyone's work
+  - Improve clarity of the description of each task
 
 - One thing you are proud of as a Team!!
 
